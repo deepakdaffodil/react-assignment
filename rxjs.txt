@@ -1,0 +1,88 @@
+
+Q) What are the differences between Subject, BehaviorSubject and ReplaySubject? And in what
+situation would you use each of these (please provide example scenarios)?
+A)  A Subject can act as both observable and an observer at the same time. Subjects are used to multicast observables.
+    When source of data can not be easily transformed into observable, then subjects can be used.
+    It is important to note that subjects can not be re-used, once subject is closed.
+
+    Outlining difference between Subject, BehaviorSubject and ReplaySubject, with code based scenarios.
+
+    Subject -> It always gets the data which is pushed after subscription and previous values are not received.
+    const sub = new Rx.Subject();
+    sub.next(1);
+    const subscription1 = sub.subscribe(x => {
+    console.log('From 1:', x);
+    });
+    sub.next(2);
+    const subscription2 = sub.subscribe(x => {
+    console.log('From 2:', x);
+    });
+    sub.next(3);
+    subscription1.unsubscribe();
+    O/P -----
+    From 1: 2
+    From 1: 3
+    From 2: 3
+    From 2: 4
+
+
+    BehaviorSubject -> It always re-emits last value on subscription or default value is no value is emitted before.
+    const sub = new Rx.BehaviorSubject('Hey now!');
+
+    sub.subscribe(x => {
+    console.log('From 1st sub:', x);
+    });
+    sub.next(5);
+    sub.subscribe(x => {
+    console.log('From 2nd sub:', x);
+    });
+    O/P -----
+    From 1st sub: Hey now!
+    From 1st sub: 5
+    From 2nd sub: 5
+
+    ReplaySubject -> It can store previous values as well and can 'replay' to new subscribers.
+    const sub = new Rx.ReplaySubject(2);
+    sub.next(1);
+    sub.next(2);
+    sub.next(3);
+    sub.next(4);
+    sub.subscribe(x => {
+    console.log('From 1st sub:', x);
+    });
+    sub.next(5);
+    sub.subscribe(x => {
+    console.log('From 2nd sub:', x);
+    });
+    sub.next(4);
+    O/P -----
+    From 1st sub: 3
+    From 1st sub: 4
+    From 1st sub: 5
+    From 2nd sub: 4
+    From 2nd sub: 5
+
+Q) If you have an array of values in a stream and you wish to pipe it such that it will emit
+   the arrays values individually, one by one and wait for them all to be completed before
+   processing another array, how would you do this?  Please provide a code example.
+   E.g.
+   [1,2] -> [3,4] -> [5,6,7]
+   Should produce:
+   1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+A)  This problem can be solved with help of switchMap
+    const source = of([1,2], [3,4],[5,6,7]);
+    const target = source.pipe(switchMap((acc) => from(acc) ));
+    const subscribe = target.subscribe(val => console.log(val));
+
+Q) If you have a stream that receives individual values and would like to pipe it such that it builds
+   an array out of these values, emitting the updated array each time a new value is added to it,
+   how would you do this?  Please provide a code example.
+   E.g.
+   1 -> 2 -> 3 -> 4
+   Should produce:
+   [1] -> [1,2] -> [1,2,3] -> [1,2,3,4]
+
+A)  This problem can be solved with help of scan
+    const source = of(1, 2, 3,4)
+    const target = source.pipe(scan((acc, curr) => { acc.push(curr); return acc; }, []))
+    const subscribe = target.subscribe(val => console.log(val));

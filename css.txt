@@ -1,0 +1,60 @@
+Q) In your own words, explain css specificity?
+A)  Specificity is a type of weighting that has a bearing on how CSS rules are displayed. Every single
+    selector has its own specificity, and if two selectors apply to the same element, the one
+    with higher specificity wins.
+
+    In short, specificity can be boiled down to below rules.
+    * Specificity is applied as per below priority (listed in descending order)
+        1) Inline Styles
+        2) IDs
+        3) Classes and pseudo classes
+        4) Elements and pseudo elements
+    * CSS Selector with 1 ID will have precedence over N number of classes.
+      (Same can be applied to all 4 specificity levels).
+    * Universal selector has no specificity.
+
+Q) In your own words, explain, what is ‘!important’ in css.  Also how does it work? Are there any special circumstances
+   when using it, where it’s behaviour might not be what you expect?
+A)  A "!important" in css is a declaration that provides a way for a stylesheet author to
+    give a CSS value more weight than it naturally has.
+
+    For eg: #example {
+                font-size: 14px !important; 
+            }
+
+            #container #example {
+                font-size: 10px;
+            }
+    In the above code example, the element with the id of “example” will have text sized at
+    14px,due to the addition of !important.
+
+    Without the use of !important, the second declaration block should naturally have more weight
+    than the first because
+    1) second block is later in the stylesheet (i.e. it’s listed second).
+    2) second block has more specificity (#container followed by #example instead of just #example).
+    But with the inclusion of !important, the first font-size rule now has more weight.
+
+    -> one Eg where i need to use it once is in 3rd party webpages integration where wordpress blogs were integrated over my
+    react website and i had to override the styles. In general we should avoid using the !important because it disrupts the natural flow of CSS, more we
+    use it more difficult it will be to maintain the styles.
+
+    -> We may not get the expected behaviour from !important in case where we want to override the
+    styles also has !important defined over it.
+
+Q) What is your prefered layout system: inline-block, floating + clearing, flex, grid, other?
+And why?
+A)  I prefer to use Flexbox. In Flexbox it is lot easier for us to create dynamic layouts and
+    align content within containers. It gives us more flexibility than any other layout system, also be easier
+    to maintain and require less code.
+
+Q) Are negative margins legal and what do they do (margin: -20px)?
+A)  Yes negative margins are legal and there are scenarios in which using the negative margin
+    is beneficial. For eg: to prevent "Margin collapsing" we can have -ve margin and same +ve
+    padding as of margin over container element.
+
+Q) If a <div/> has no margin or other styling and a <p/> tag inside of it has a margin top
+of some kind, the margin from the <p/> tag will show up on the div instead (the margin will
+show above the div not inside of it), why is this?  What are the different things that can
+be done to prevent it?
+A)  It is the case of "Collapsed margin" as mention in the example of previous question. Any padding over <div /> can fix
+    this. Here we can have -ve margin and same +ve padding as of margin over <div /> element.

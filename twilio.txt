@@ -1,0 +1,9 @@
+Q) Explain which of the Twilio Api’s you have used.  Also explain how and in what scenarios
+   you have used them.
+
+A)  We have used Twilio Api for,
+
+    1. Programmable Chat - for one to one and group Chat integration.
+    2. Programmable SMS - for promotional and transaction SMSes for 2FA based login integration.
+    3. Twilio SendGrid Email Api - For promotional and Transactional emails such as newsletters,
+       forgot password, email OTP based 2FAs.

@@ -1,0 +1,16 @@
+Q) What technologies do you use to unit test your react components?
+A)  We use Jest and Enzyme to unit test our react components where
+    -> Jest provides a test runner, assertion library, and mocking library.
+    -> Enzyme is a JavaScript Testing utility for React that makes it easier to assert,
+       manipulate, and traverse your React Components’ output.
+
+Q) Are there any pitfalls associated with this technology that have caused you difficulty
+   in the past?
+A)  Yes, I found it difficult to test asynchronous processes and we can not test react portals
+    using the same.
+
+Q) How do you test in your unit tests to see if the correct properties are being passed to child components.
+A)  We usually set state and props for the component we going to test and then we use enzyme utils
+    (shallow or full dom render apis) to check whether expected elements on dom and rendered or not.
+
+

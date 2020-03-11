@@ -1,0 +1,85 @@
+Q) What is your favourite new javascript feature and why?
+A)  Spread/Rest operator is one of my favourite feature among js new features. I like it because of its
+    of its intuitiveness, versitality and it reduces the need to use various built in js functions
+    for specific problems instead we can use this operator only.
+
+    For eg:
+
+    const foo = ['hello', 'bonjour', 'konnichiwa'];
+    const bar = ['sayonara', 'au revoir', 'aloha'];  
+
+    -> const clonedFoo = [...foo]; // shallow copies foo into clonedFoo
+    -> const concatenatedFooBar = [...foo, ...bar]; // concatenate two array
+
+Q) Explain an interesting way in which you have used this (spread/rest operator) javascript feature?
+A)  There are many ways in which i have used spread/rest operator, some of them are explained below
+    1) Create an array from characters in a string
+       For eg:   
+       const string = "ABCD";
+       
+       -> const arr = [...string]; // ['A', 'B', 'C', 'D']
+    
+    2) Take out rest from an Object/Array when destructuring
+       For eg:
+       const obj = {
+           foo: 'fooVal',
+           bar: 'barVal',
+           baz: 'bazVal'
+       }
+       
+       -> const { foo, ...rest } = obj;
+        console.log(rest); // { bar: 'barVal', baz: 'bazVal' };
+
+       const arr = [1, 2, 3, 4];
+
+       -> const [num1, ...rest] = arr;
+       console.log(rest); // [2, 3, 4]
+
+    3) Find the smallest/largest number in an array
+       const arr = [2, 1, 32, 40, 4, 6];
+
+       -> console.log(Math.max(...arr));
+       -> console.log(Math.min(...arr));
+
+    4) Taking rest out of function parameters (Which removes need of ‘arguments’ keyword)
+       function printNumbers(...numbers) {
+         numbers.map(number => console.log(number));
+       }
+       printNumbers(1)
+       printNumbers(1,2)
+       printNumbers(1,2,3)
+	
+    5) Merging Arrays/Objects
+       const arr1 = [1,2,3];
+       const arr2 = [4,5,6];
+       const arr3 = [...arr1,...arr2];
+
+       const obj1 = {a: 'a', b: 'b'};
+       const obj2 = {c: 'c', d: 'd'};
+       const obj3 = {...obj1, ...obj2};
+
+
+Q) Is there any difference between regular function syntax and the shorter arrow function syntax?
+A)  In compare to regular function Arrow syntax
+    -> automatically binds "this" to the surrounding code's context.
+    -> allows an implicit return when there is no body block, resulting in shorter and
+      simpler code in some cases.
+    -> call, bind don't have effect over arrow function.
+    -> arrow functions are unnamed, thus not hoisted.
+
+Q) What is the difference between ‘myFunctionCall(++foo)’ and ‘myFunctionCall(foo++)’?
+A)  -> In invocation of 'myFunctionCall(++foo)' value of foo will get increament by 1 and then passed to function
+    if it is of type "number" otherwise would be NaN.
+    -> In invocation of 'myFunctionCall(foo++)' same value of foo will be passed to function.
+
+Q) In your own words, explain what a javascript ‘class’ is and how it differs from a function?
+A)  In general "class" is a way to construct objects.
+    In Js we can do the same by using functions with constructor keyword "new" as well. It is the way which
+    we were using to create objects before 'class' was inroduced in Js.
+    In Js Classes are primarily syntactical sugar for prototype-based inheritance. Several benefits of it over
+    the old way are listed below:
+    -> The syntax is way more clean and easier to understand  and similar to traditional OOP languages.
+    -> Now functions ought to be used as function only.
+    -> Much cleaner syntax to perform inheritance.
+    -> Doesn’t allow to instantiate the class without the new keyword.
+
